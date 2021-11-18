@@ -1,0 +1,17 @@
+[
+    {
+        "id":"1",
+        "title":"Ongoing wants to do a giveaway of their Food Item ",
+        "status":"ongoing"
+    },
+    {
+        "id":"2",
+        "title":"Ongoing2 wants to do a giveaway of their Food Item ",
+        "status":"ongoing"
+    },
+    {
+        "id":"3",
+        "title":"Pending wants to do a giveaway of their Food Item ",
+        "status":"pending"
+    }
+]
