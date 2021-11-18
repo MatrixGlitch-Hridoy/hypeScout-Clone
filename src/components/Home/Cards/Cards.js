@@ -12,7 +12,7 @@ import {
 import { makeStyles } from "@material-ui/core/styles";
 import { Image } from "@material-ui/icons";
 import React from "react";
-import image from "../../images/banner.png";
+import image from "../../../images/banner.png";
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -45,6 +45,12 @@ const useStyles = makeStyles((theme) => ({
     height: 38,
     width: 38,
   },
+  message:{
+    fontSize:30,
+    fontWeight:900,
+    textAlign:'center',
+    marginTop:30
+  }
 }));
 const Cards = ({ data }) => {
   // console.log(data, "Here");
@@ -82,7 +88,7 @@ const Cards = ({ data }) => {
 
         ))
       ) : (
-        <Typography>You do not have any campaigns yet</Typography>
+        <Typography className={classes.message}>You do not have any campaigns yet</Typography>
       )}
     </>
   );
