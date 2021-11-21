@@ -1,12 +1,8 @@
 import {
-  Avatar,
-  Box,
-  Button,
   Card,
   CardContent,
-  CardMedia,
-  Container,
   Grid,
+  Paper,
   Typography,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
@@ -18,22 +14,20 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     marginBottom:10,
     marginTop:30,
-    width:'50%',
   },
   details: {
     display: "flex",
     padding:10,
-    // flexDirection: "column",
   },
   content: {
     flex: "1 0 auto",
   },
-  cover: {
-    // width: '100%',
-    height:0,
-    paddingTop:'100%',
-    borderRadius:10
-    // marginTop:'5'
+  image:{
+    width:'100%',
+    height:'100%',
+    backgroundPosition:'center',
+    backgroundSize:'cover',
+    
   },
   controls: {
     display: "flex",
@@ -50,6 +44,11 @@ const useStyles = makeStyles((theme) => ({
     fontWeight:900,
     textAlign:'center',
     marginTop:30
+  },
+  title:{
+    [theme.breakpoints.down('sm')]: {
+      fontSize:15
+    },
   }
 }));
 const Cards = ({ data }) => {
@@ -60,21 +59,40 @@ const Cards = ({ data }) => {
     <>
       {data.length !== 0 ? (
         data.map((d) => (
-            <Grid container key={d.id}>
-              <Card className={classes.root}>
-                <div className={classes.details}>
-                  <Grid item md={4}>
-                    <CardMedia
-                      className={classes.cover}
-                      image={image}
-                      title="Live from space album cover"
-                    />
-                    {/* <Image src={image}/> */}
-                    {/* <img src={image} className={classes.cover}/> */}
+
+              // <Card className={classes.root} key={d.id}>
+              //   <div className={classes.details}>
+              //     <Grid item md={4}>
+              //       <CardMedia
+              //         className={classes.cover}
+              //         image={image}
+              //         title="Live from space album cover"
+              //       />
+              //       {/* <Image src={image}/> */}
+              //       {/* <img src={image} className={classes.cover}/> */}
+              //     </Grid>
+              //     <Grid item md={8}>
+              //       <CardContent className={classes.content}>
+              //         <Typography component="h5" variant="h5">
+              //           {d.title}
+              //         </Typography>
+              //         <Typography variant="subtitle1" color="textSecondary">
+              //           Mac Miller
+              //         </Typography>
+              //       </CardContent>
+              //     </Grid>
+              //   </div>
+              // </Card>
+
+              <Grid item sm={12} md={6} className={classes.root} key={d.id}>
+                <Grid container>
+                  <Paper className={classes.details}>
+                   <Grid item xs={3} md={4}>
+                      <img src={image} alt="image" className={classes.image}/>
                   </Grid>
-                  <Grid item md={8}>
+                  <Grid item xs={9} md={8}>
                     <CardContent className={classes.content}>
-                      <Typography component="h5" variant="h5">
+                      <Typography component="h5" variant="h5" className={classes.title}>
                         {d.title}
                       </Typography>
                       <Typography variant="subtitle1" color="textSecondary">
@@ -82,9 +100,9 @@ const Cards = ({ data }) => {
                       </Typography>
                     </CardContent>
                   </Grid>
-                </div>
-              </Card>
-            </Grid>
+                </Paper>
+                </Grid>
+              </Grid>
 
         ))
       ) : (

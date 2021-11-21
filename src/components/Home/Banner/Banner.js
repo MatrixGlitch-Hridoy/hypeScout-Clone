@@ -1,5 +1,5 @@
 import { Box, Button, Container, Grid, Typography } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import React from 'react';
 const useStyles = makeStyles((theme) => ({
     container:{
@@ -16,7 +16,15 @@ const useStyles = makeStyles((theme) => ({
         fontWeight:'bold',
         padding:10,
         fontSize:20,
-        textTransform:'lowercase'
+        textTransform:'lowercase',
+        [theme.breakpoints.down('sm')]: {
+           fontSize:15
+          },
+    },
+    typography:{
+        [theme.breakpoints.down('sm')]:{
+            fontSize:20
+        }
     }
   }));
 const Banner = () => {
@@ -24,13 +32,13 @@ const Banner = () => {
     return (
         <Container>
             <Box className={classes.container} borderRadius="borderRadius">
-                <Grid container className={classes.flex}>
-                <Grid item xs={12} md={10}>
-                    <Typography variant="h4">
+                <Grid container className={classes.flex} spacing={2}>
+                <Grid item xs={6} md={10}>
+                    <Typography variant="h4" className={classes.typography}>
                         <Box fontWeight={900}>My Campaigns</Box> 
                     </Typography>
                 </Grid>
-                <Grid item xs={12} md={2}>
+                <Grid item xs={6} md={2}>
                     <Button variant="contained" color="primary" className={classes.button}>Create Campaign</Button>
                 </Grid>
                 </Grid>

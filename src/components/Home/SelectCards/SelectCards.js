@@ -39,7 +39,9 @@ const SelectCards = () => {
                 <Button onClick={()=>handleClick('declined')}>Declined</Button>
                 </Grid>
             </Grid>
-            <Cards data={newData}></Cards>  
+            <Grid container spacing={3}>
+                <Cards data={newData}></Cards>  
+            </Grid>
         </Container>
     );
 };

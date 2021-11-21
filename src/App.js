@@ -2,10 +2,10 @@ import Homepage from "./Pages/UserPages/Homepage";
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
 import ProfilePage from "./Pages/UserPages/ProfilePage";
+import SettingPage from "./Pages/UserPages/SettingPage";
 
 function App() {
   return (
@@ -16,6 +16,9 @@ function App() {
         </Route>
         <Route path="/profile">
           <ProfilePage/>
+        </Route>
+        <Route path="/setting">
+          <SettingPage/>
         </Route>
       </Switch>
     </Router>

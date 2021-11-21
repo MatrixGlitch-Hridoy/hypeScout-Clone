@@ -1,11 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Avatar, Box, Button, Container, Grid, makeStyles, Paper, Typography } from '@material-ui/core';
 import FlashOnIcon from '@material-ui/icons/FlashOn';
 import PeopleIcon from '@material-ui/icons/People';
 import Taka from '../../images/taka.png';
+import { Link, useRouteMatch, Switch, Route } from 'react-router-dom';
+import Statistics from './Statistics';
+import PaymentList from '../PaymentList/PaymentList';
+
 const useStyles = makeStyles((theme) => ({
     avatar:{
         width:'30%',
+        [theme.breakpoints.down('sm')]: {
+            width:'40%',
+        },
     },
     flex:{
         // justifyContent:'flex-start',
@@ -20,22 +27,37 @@ const useStyles = makeStyles((theme) => ({
     button:{
         backgroundColor:'#e0e2f5',
         borderRadius:'5px',
-        width:'100%'
+        width:'100%',
+        fontWeight:900,
+        textDecoration:'none'
     },
     typography:{
         lineHeight:'2rem',
         color:'#939aa3'
+    },
+    code:{
+        backgroundColor:'#f3f4fb',
+        padding:'10px 15px',
+        width:'75%',
+        [theme.breakpoints.down('sm')]: {
+            width:'90%',
+            fontSize:15
+        },
+    },
+    iconAvatar:{
+        width:'5%',
+        [theme.breakpoints.down('sm')]: {
+            width:'15%',
+        },
     }
   }));
 const Profile = () => {
     const classes = useStyles();
-    const handleClick = (value) => {
-
-    }
+    let {path,url} = useRouteMatch();
     return (
         <Container container>
             <Grid container>
-                <Grid item md={4}>
+                <Grid item xs ={12} md={4}>
                     <Box className={classes.avatar} sx={{mt:3}}>
                         <Avatar src="/broken-image.jpg" style={{backgroundSize:'cover',height:'7rem',width:'100%'}}/>
                     </Box>
@@ -56,59 +78,37 @@ const Profile = () => {
                     </Box>
                     <Box>
                         <Typography><Box fontWeight={900} fontSize={20}>Your Unique Code</Box></Typography>
-                        <Typography><Box fontWeight={900} sx={{my:2}} style={{backgroundColor:'#f3f4fb',padding:'10px 15px',width:'75%'}}>b57ff6fa-99e9-4bf2-81fc-9c21138f311a</Box></Typography>
+                        <Typography><Box fontWeight={900} sx={{my:2}} className={classes.code}>b57ff6fa-99e9-4bf2-81fc-9c21138f311a</Box></Typography>
                     </Box>
                 </Grid>
-                <Grid item md={8}>
+                <Grid item xs={12} md={8}>
                     <Grid container className={classes.flex} spacing={2} >
-                        <Grid item md={4} >
-                            <Button onClick={()=>handleClick('statistics')} className={classes.button}>Statistics</Button>
+                        <Grid item xs={12} md={4} >
+                            <Link style={{textDecoration:'none'}} to={`${url}`}>
+                                <Button className={classes.button}>Statistics</Button>
+                            </Link>
                         </Grid>
-                        <Grid item md={4} >
-                            <Button onClick={()=>handleClick('payment')} className={classes.button}>Payment</Button>
+                        <Grid item xs={12} md={4} >
+                            <Link style={{textDecoration:'none'}} to={`${url}/payment`}>
+                                <Button className={classes.button}>Payment</Button>
+                            </Link>
                         </Grid>
-                        <Grid item md={4} >
-                            <Button onClick={()=>handleClick('setting')} className={classes.button}>Setting</Button>
-                        </Grid>
-                    </Grid>
-                    <Typography><Box fontWeight={900} fontSize={25} sx={{my:2}}>Statistics</Box></Typography>
-                    <Grid container spacing={3} >
-                        <Grid item md={6} >
-                            <Paper elevation={3} className={classes.profileCard}>
-                                <Box><FlashOnIcon style={{fontSize:'2rem'}}/></Box>
-                                <Typography variant="h4">
-                                    <Box fontWeight={900} sx={{my:1}} fontSize={45}>1</Box>
-                                </Typography>
-                                <Typography variant="h5">
-                                    <Box fontWeight={900}>Campaigns</Box>
-                                </Typography>
-                            </Paper>
-                        </Grid>
-                        <Grid item md={6}>
-                            <Paper elevation={3} className={classes.profileCard}>
-                            <Box><PeopleIcon style={{fontSize:'2rem'}}/></Box>
-                                <Typography variant="h4">
-                                    <Box fontWeight={900} sx={{my:1}} fontSize={45}>0</Box>
-                                </Typography>
-                                <Typography variant="h5">
-                                    <Box fontWeight={900}>Hired</Box>
-                                </Typography>
-                            </Paper>
+                        <Grid item xs={12} md={4} >
+                            <Link style={{textDecoration:'none'}} to="/setting/personal">
+                                <Button className={classes.button}>Setting</Button>
+                            </Link>
                         </Grid>
                     </Grid>
-                    <Grid container>
-                        <Grid item md={12}>
-                        <Paper elevation={3} className={classes.profileCard} style={{marginTop:'1.5rem'}}>
-                                <Box><Avatar src={Taka} style={{width:'5%'}}/></Box>
-                                <Typography variant="h4">
-                                    <Box fontWeight={900} sx={{my:1}} fontSize={45}>0</Box>
-                                </Typography>
-                                <Typography variant="h5">
-                                    <Box fontWeight={900}>BDT Spent</Box>
-                                </Typography>
-                            </Paper>
-                        </Grid>
-                    </Grid>
+                   {/* Nested Route Here */}
+                   <Switch>
+                       <Route exact path={path}>
+                            <Statistics/>
+                       </Route>
+                       <Route exact path={`${path}/payment`}>
+                            <PaymentList/>
+                       </Route>
+                       
+                   </Switch>
                 </Grid>
             </Grid>
         </Container>

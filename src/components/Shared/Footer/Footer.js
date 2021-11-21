@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Container, Divider, Grid, List, Typography } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import InstagramIcon from '@material-ui/icons/Instagram';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import TwitterIcon from '@material-ui/icons/Twitter';
@@ -8,8 +8,11 @@ import YouTubeIcon from '@material-ui/icons/YouTube';
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
 const useStyles = makeStyles((theme) => ({
     root: {
-      marginTop:'10rem'
+      marginTop:'10rem',
+      [theme.breakpoints.down('sm')]: {
+        margin:'5rem 0',
     },
+},
     listText:{
         color:'#9f9fb7'
     },
@@ -19,7 +22,14 @@ const useStyles = makeStyles((theme) => ({
     },
     socialIcon:{
         marginTop:'1rem'
-    }
+    },
+    logo:{
+        fontSize:'2rem',
+        fontWeight:'bold',
+        [theme.breakpoints.down('sm')]: {
+            display:'none'
+        },
+    },
   }));
 const Footer = () => {
     const classes = useStyles();
@@ -28,9 +38,9 @@ const Footer = () => {
             <Divider/>
             <Grid container className={classes.mainGrid}>
                 <Grid item md={3}>
-                    <Typography style={{fontSize:'2rem',fontWeight:'bold'}}>hype scout</Typography>
+                    <Typography className={classes.logo}>hype scout</Typography>
                 </Grid>
-                <Grid item md={2}>
+                <Grid item xs={6} md={2}>
                     <Typography><Box fontWeight={900}>Company</Box></Typography>
                     <Box className={classes.listText}>
                         <List>Terms</List>
@@ -38,14 +48,14 @@ const Footer = () => {
                         <List>Contact Us</List>
                     </Box>
                 </Grid>
-                <Grid item md={2}>
+                <Grid item xs={6} md={2}>
                     <Typography><Box fontWeight={900}>Resources</Box></Typography>
                     <Box className={classes.listText}>
                         <List>Blogs</List>
                         <List>Case Study</List>
                     </Box>
                 </Grid>
-                <Grid item md={2}>
+                <Grid item xs={6} md={2}>
                     <Typography><Box fontWeight={900}>Advertiser</Box></Typography>
                     <Box className={classes.listText}>
                         <List>Join as Advertiser</List>
