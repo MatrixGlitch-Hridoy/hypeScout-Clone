@@ -11,6 +11,7 @@ import {
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { MenuIcon } from "@material-ui/icons";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -50,7 +51,9 @@ const Header = () => {
               {/* <MenuIcon /> */}
             </IconButton>
             <Typography variant="h5" className={classes.title}>
-              <Box fontWeight={900}>hype scout</Box>
+              <Link to="/" style={{textDecoration:'none'}}>
+                <Box fontWeight={900} style={{color:'black'}}>hype scout</Box>
+              </Link>
             </Typography>
             <Button color="inherit" >Login</Button>
           </Toolbar>

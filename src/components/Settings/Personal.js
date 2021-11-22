@@ -1,6 +1,7 @@
 import React from "react";
 import {
-    Button,
+  Box,
+  Button,
   FormControl,
   FormHelperText,
   Grid,
@@ -11,7 +12,15 @@ import {
   TextField,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-// const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles((theme) => ({
+  root: {
+    '& .MuiTextField-root': {
+      marginTop: theme.spacing(2),
+    },
+  },
+      button:{
+        backgroundColor:"black"
+      }
 //     formControl: {
 //       margin: theme.spacing(1),
 //       minWidth: 120,
@@ -19,9 +28,9 @@ import { makeStyles } from "@material-ui/core/styles";
 //     selectEmpty: {
 //       marginTop: theme.spacing(2),
 //     },
-//   }));
+  }));
 const Personal = () => {
-  // const classes = useStyles();
+  const classes = useStyles();
   const [age, setAge] = React.useState("");
 
   const handleChange = (event) => {
@@ -31,7 +40,7 @@ const Personal = () => {
     <div>
       <h1>Personal</h1>
       <h2>Basic Settings</h2>
-      <form>
+      <form className={classes.root}>
         <FormControl variant="outlined" fullWidth>
           <InputLabel id="demo-simple-select-outlined-label">City</InputLabel>
           <Select
@@ -55,6 +64,7 @@ const Personal = () => {
           placeholder="Enter your email"
           fullWidth
           variant="outlined"
+          
         />
         <TextField
           id="outlined-full-width"
@@ -84,15 +94,16 @@ const Personal = () => {
           fullWidth
           variant="outlined"
         />
-
-        <Button variant="contained" color="primary">
-        Save
-        </Button>
+        <Box sx={{my:2}}>
+          <Button variant="contained" color="primary" className={classes.button}>
+            Save
+          </Button>
+        </Box>
       </form>
 
       <h1>Security setting</h1>
-      <form>
-      <TextField
+      <form className={classes.root}>
+        <TextField
           id="outlined-full-width"
           label="Old Password"
           placeholder="old password"
@@ -113,10 +124,11 @@ const Personal = () => {
           fullWidth
           variant="outlined"
         />
-
-        <Button variant="contained" color="primary">
-        Change password
-        </Button>
+        <Box sx={{my:2}}>
+          <Button variant="contained" color="primary" className={classes.button}>
+            Change password
+          </Button>
+        </Box>
       </form>
     </div>
   );

@@ -6,6 +6,7 @@ import {
 } from "react-router-dom";
 import ProfilePage from "./Pages/UserPages/ProfilePage";
 import SettingPage from "./Pages/UserPages/SettingPage";
+import CampaignPage from "./Pages/UserPages/CampaignPage";
 
 function App() {
   return (
@@ -19,6 +20,9 @@ function App() {
         </Route>
         <Route path="/setting">
           <SettingPage/>
+        </Route>
+        <Route path="/new">
+          <CampaignPage/>
         </Route>
       </Switch>
     </Router>

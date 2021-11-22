@@ -1,7 +1,14 @@
 import { Box, Button, FormControl, FormControlLabel, InputLabel, MenuItem, Select, Switch, Typography } from '@material-ui/core';
 import React, { useState } from 'react';
-
+import { makeStyles } from "@material-ui/core/styles";
+const useStyles = makeStyles((theme) => ({
+    
+    button:{
+      backgroundColor:"black"
+    }
+}));
 const Campaign = () => {
+    const classes = useStyles();
     const [influenceState, setInfluenceState] = useState({
         checkedA: true,
         checkedB: true,
@@ -17,11 +24,11 @@ const Campaign = () => {
     return (
         <div>
             <h1>Campaign Settings</h1>
-            <Box style={{border:'1px solid black',padding:'1rem',backgroundColor:'#f8f8f9'}}>
-                <Typography variant="h5">Enable influencer exclusivity for your campaigns</Typography>
-                <Typography variant="h6">Influencers who sign up for your campaigns will not be able to work with your competitors for the duration of your choice.</Typography>
+            <Box style={{border:'1px solid black',padding:'1rem',backgroundColor:'#f8f8f9'}} sx={{my:2}}>
+                <Typography variant="h6">Enable influencer exclusivity for your campaigns</Typography>
+                <Typography style={{fontSize:'1rem'}}>Influencers who sign up for your campaigns will not be able to work with your competitors for the duration of your choice.</Typography>
             </Box>
-            <Box>
+            <Box sx={{my:3}}>
         <FormControlLabel
           control={
             <Switch
@@ -32,6 +39,8 @@ const Campaign = () => {
           }
           label="Influencer Exclusivity"
         />
+        </Box>
+        <Box>
         {
             influenceState.checkedA===true && 
             <FormControl variant="outlined" fullWidth>
@@ -54,9 +63,11 @@ const Campaign = () => {
           </FormControl>
         }
       </Box>
-      <Button variant="contained" color="primary">
-        Save
-        </Button>
+      <Box sx={{my:3}}>
+            <Button variant="contained" color="primary" className={classes.button}>
+            Save
+            </Button>
+        </Box>
         </div>
     );
 };

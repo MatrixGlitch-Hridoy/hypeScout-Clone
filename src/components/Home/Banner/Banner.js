@@ -1,6 +1,7 @@
-import { Box, Button, Container, Grid, Typography } from '@material-ui/core';
+import { Box, Button, Container, Grid,Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import React from 'react';
+import { Link } from 'react-router-dom';
 const useStyles = makeStyles((theme) => ({
     container:{
         backgroundColor:'#F7F7F8',
@@ -14,9 +15,9 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor:'black',
         color:'white',
         fontWeight:'bold',
-        padding:10,
+        padding:"10 20",
         fontSize:20,
-        textTransform:'lowercase',
+        textTransform:'capitalize',
         [theme.breakpoints.down('sm')]: {
            fontSize:15
           },
@@ -33,13 +34,15 @@ const Banner = () => {
         <Container>
             <Box className={classes.container} borderRadius="borderRadius">
                 <Grid container className={classes.flex} spacing={2}>
-                <Grid item xs={6} md={10}>
+                <Grid item xs={6} md={9}>
                     <Typography variant="h4" className={classes.typography}>
                         <Box fontWeight={900}>My Campaigns</Box> 
                     </Typography>
                 </Grid>
-                <Grid item xs={6} md={2}>
+                <Grid item xs={6} md={3}>
+                <Link to="/new" style={{textDecoration:'none'}}>
                     <Button variant="contained" color="primary" className={classes.button}>Create Campaign</Button>
+                </Link>
                 </Grid>
                 </Grid>
             </Box>
