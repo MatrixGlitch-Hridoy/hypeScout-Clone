@@ -1,223 +1,422 @@
-import React, { useState } from 'react';
+import {
+  Box,
+  Button,
+  Container,
+  Divider,
+  FormControl,
+  Grid,
+  InputLabel,
+  MenuItem,
+  Paper,
+  Select,
+  TextField,
+  Typography,
+} from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+const useStyles = makeStyles((theme) => ({
+  link: {
+    "& *": {
+      cursor: "pointer",
+      [theme.breakpoints.down("sm")]: {
+        textAlign: "center",
+        padding: "1rem",
+      },
+    },
+  },
+  button: {
+    backgroundColor: "black",
+    color: "white",
+  },
+}));
 
 const GeneralForm = () => {
-   
-   // const [primaryOptionPaltform, setPrimaryOptionPlatform] = useState(false);
-    // const [one, setOne] = useState(true);
-    // const [two, setTwo] = useState(false);
-    // const [three, setThree] = useState(false);
-    // const [four, setFive] = useState(false);
-    // const [five, setSix] = useState(false);
-    // const [six, setSeven] = useState(false);
-   
-  
-  //let show=[true,false,false,false,false,false,false];
-    //const[dispaly,setDisplay]=useState([true,false,false,false,false,false,false]);
-    //const[show,setShow]=useState({0:true,1:false,2:false,3:false,4:false,5:false,6:false});
-    // const[show,setShow]=useState([true,false,false,false,false,false,false]);
-    // const handleOptionPlatform = (id) => {
-    //     let dispaly=[false,false,false,false,false,false,false];
-    //     //let dispaly=show;
-    //      // console.log('clicke platform',id);
-    //     let nextId=parseInt(id+1);
-    //    // console.log('next id',show);
-    //     dispaly[id]=!show[id];
-    //     //dispaly[id]=false;
-    //     //console.log('dipaly one',dispaly);
-    //     dispaly[`${nextId}`]=!show[`${nextId}`];
-      
-     
-    //    // show[id]=!show[id];
-    //     console.log('dipaly second',dispaly);
-    //     //show=dispaly;
-    //     setShow(dispaly);
-        
-       
-    // }
-    // const handleOptionPlatformBack = (id) => {
-    //     let dispaly=[false,false,false,false,false,false,false];
-    //     //let dispaly=show;
-    //      // console.log('clicke platform',id);
-    //     let nextId=parseInt(id-1);
-    //    // console.log('next id',show);
-    //     dispaly[id]=!show[id];
-    //     //dispaly[id]=false;
-    //     //console.log('dipaly one',dispaly);
-    //     dispaly[`${nextId}`]=!show[`${nextId}`];
-      
-     
-    //    // show[id]=!show[id];
-    //     console.log('dipaly second',dispaly);
-    //     //show=dispaly;
-    //     setShow(dispaly);
-        
-       
-    // }
-    const [form, setForm] = useState({
-        email: "",
-        name: "",
-        password: "",
-      })
-      const [count, setCount] = useState(1)
+  const classes = useStyles();
+  const [form, setForm] = useState({
+    platform: "",
+    AdditionalPlatform: "",
+    promotionType: "",
+    promotionName:"",
+    place:{
+        division:"abc",
+        address:""
+    }
     
-      const updateForm = (e) => {
-        setForm({
-          ...form,
-          [e.target.name]: e.target.value,
-        })
-      }
-    return (
-        <>  
-            {
-            /* {show[0]&& <div>
-            <h1>Platform1</h1>
-            
-            <h2>What is your primary platform?</h2>
-            <p>Primary platform where you want to run this campaign</p>
-            <input type="text"/>
-            <div><button onClick={()=>handleOptionPlatform(0)}>next</button></div>
-            </div>
-            }
-            {show[1] && <div>
-            <h1>Platform2</h1>
-            
-            <h2>What is your primary platform?</h2>
-            <p>Primary platform where you want to run this campaign</p>
-            <input type="text"/>
-            <div><button onClick={()=>handleOptionPlatform(1)}>next</button></div>
-            <div><button onClick={()=>handleOptionPlatformBack(1)}>Back</button></div>
-            </div>
-            }
-            {show['2'] && <div>
-            <h1>Platform3</h1>
+  });
+  const [count, setCount] = useState(1);
+  const [contentOption, setContentOption] = useState("");
+  const [locationOption, setLocationOption] = useState("");
+  const [sendOption, setSendOption] = useState("");
+  const updateForm = (e) => {
+   
+    // (e.target.name==='division'||e.target.name==='address')?(
+      
+        
+    //     setForm({
+       
+    //     ...form,
+     
+    //     place: placechange,
+        
+        
+        
+    //   })):( setForm({
+       
+    //     ...form,
+       
+    //     [e.target.name]: e.target.value,
+        
+    //   }))
 
-            <h2>What is your primary platform?</h2>
-            <p>Primary platform where you want to run this campaign</p>
-            <input type="text"/>
-            <div><button onClick={()=>handleOptionPlatform(2)}>next</button></div>
-            <div><button onClick={()=>handleOptionPlatformBack(2)}>Back</button></div>
-            </div>
-            }
-            {show['3'] && <div>
-            <h1>Platform3</h1>
-
-            <h2>What is your primary platform?</h2>
-            <p>Primary platform where you want to run this campaign</p>
-            <input type="text"/>
-            <div><button onClick={()=>handleOptionPlatform(3)}>next</button></div>
-            <div><button onClick={()=>handleOptionPlatformBack(3)}>Back</button></div>
-            </div>
-            }
-            {show['4'] && <div>
-            <h1>Platform4</h1>
-
-            <h2>What is your primary platform?</h2>
-            <p>Primary platform where you want to run this campaign</p>
-            <input type="text"/>
-            <div><button onClick={()=>handleOptionPlatform(4)}>next</button></div>
-            <div><button onClick={()=>handleOptionPlatformBack(4)}>Back</button></div>
-            </div>
-            }
-            {show['5'] && <div>
-            <h1>Platform5</h1>
-
-            <h2>What is your primary platform?</h2>
-            <p>Primary platform where you want to run this campaign</p>
-            <input type="text"/>
-            <div><button onClick={()=>handleOptionPlatform(5)}>next</button></div>
-            <div><button onClick={()=>handleOptionPlatformBack(5)}>Back</button></div>
-            </div>
-            }
-            {show['6'] && <div>
-            <h1>Platform6</h1>
-
-            <h2>What is your primary platform?</h2>
-            <p>Primary platform where you want to run this campaign</p>
-            <input type="text"/>
-           
-            <div><button onClick={()=>handleOptionPlatformBack(6)}>Back</button></div>
-            </div>
-            }
-           
-            {primaryOptionPaltform && <div>
-            <h1> Option Platform</h1>
-
-            <h2>What is your Additional Platforms (Optional)?</h2>
-            <p>Additional platforms to boost your campaign</p>
-            <input type="text"/>
-            <div><button>next</button></div>
-            </div>
-            } */
-            }
-      <h1>Step {count} of 3</h1>
-      <form
-        className="col-4 form"
-        onSubmit={() =>
-          alert(
-            `Submitted Email: ${form.email} Name: ${form.name} Password: ${form.password}`
-          )
+      if(e.target.name==='division'||e.target.name==='address'){
+        var placechange={
+            ...form.place,
+         
+            [e.target.name]: e.target.value,
+    
         }
-      >
-        {count === 1 ? (
-          <div className="form-group">
-            <label>Email</label>
-            <input
-              type="email"
-              className="form-control"
-              name="email"
-              onChange={updateForm}
-              value={form.email}
-            />
-          </div>
-        ) : null}
-        {count === 2 ? (
-          <div className="form-group">
-            <label>Name</label>
-            <input
-              type="text"
-              className="form-control"
-              name="name"
-              onChange={updateForm}
-              value={form.name}
-            />
-          </div>
-        ) : null}
-        {count === 3 ? (
-          <div className="form-group">
-            <label>Password</label>
-            <input
-              type="password"
-              className="form-control"
-              name="password"
-              onChange={updateForm}
-              value={form.password}
-            />
-          </div>
-        ) : null}
-        {count === 3 ? (
-          <button className="btn btn-primary" type="submit">
-            Submit
-          </button>
-        ) : null}
-      </form>
-      <button
-        className="btn btn-dark"
-        type="submit"
-        onClick={() => setCount(count - 1)}
-        disabled={count < 2}
-      >
-        Back
-      </button>
-      <button
-        className="btn btn-light"
-        type="submit"
-        onClick={() => setCount(count + 1)}
-        disabled={count > 2}
-      >
-        Next
-      </button>
-        </>
-    );
+
+        setForm({
+       
+            ...form,
+         
+            place: placechange,
+            
+            
+            
+          })
+
+      }else{
+        setForm({
+       
+            ...form,
+           
+            [e.target.name]: e.target.value,
+            
+          })
+      }
+
+    
+    
+    // setForm({
+    //     ...form.place,
+     
+    //     [e.target.name]: e.target.value,
+      
+    // });
+  };
+  const handlePlaceOption = (value) => {
+    setLocationOption(value);
+  };
+  console.log('set value',form);
+  return (
+    <Container>
+      <Grid container justifyContent="center" style={{ margin: "2rem 0" }}>
+        <Grid item xs={12} md={10}>
+          <Paper style={{ padding: "2rem" }}>
+            <Box>
+              <form>
+                <Grid container alignItems="center">
+                  {count === 1 && (
+                    <>
+                      <Grid item xs={12} md={5}>
+                        <Typography variant="h6">Primary Platform</Typography>
+                        <Typography>
+                          Primary platform where you want to run this campaign
+                        </Typography>
+                      </Grid>
+                      <Grid item xs={12} md={7}>
+                        <FormControl variant="outlined" fullWidth>
+                          <InputLabel id="demo-simple-select-outlined-label">
+                            Select Primary Platform
+                          </InputLabel>
+                          <Select
+                            labelId="demo-simple-select-outlined-label"
+                            id="demo-simple-select-outlined"
+                            label="Age"
+                            name="platform"
+                            onChange={updateForm}
+    //           value={form.password}
+                          >
+                            <MenuItem value="">
+                              <em>None</em>
+                            </MenuItem>
+                            <MenuItem value={'facebook'}>Facebook</MenuItem>
+                            <MenuItem value={'instagram'}>Instagram</MenuItem>
+                            <MenuItem value={'youtube'}>YouTube</MenuItem>
+                            <MenuItem value={'tiktok'}>TikTok</MenuItem>
+                          </Select>
+                        </FormControl>
+                      </Grid>
+                    </>
+                  )}
+                  {count === 2 && (
+                    <>
+                      <Grid item xs={12} md={5}>
+                        <Typography variant="h6">
+                          Additional Platforms (Optional)
+                        </Typography>
+                        <Typography>
+                          Additional platforms to boost your campaign
+                        </Typography>
+                      </Grid>
+                      <Grid item xs={12} md={7}>
+                        <FormControl variant="outlined" fullWidth>
+                          <InputLabel id="demo-simple-select-outlined-label">
+                            City
+                          </InputLabel>
+                          <Select
+                            labelId="demo-simple-select-outlined-label"
+                            id="demo-simple-select-outlined"
+                            label="Age"
+                            name="AdditionalPlatform"
+                            onChange={updateForm}
+                          >
+                            <MenuItem value="">
+                              <em>None</em>
+                            </MenuItem>
+                            <MenuItem value={'facebook'}>Facebook</MenuItem>
+                            <MenuItem value={'instagram'}>Instagram</MenuItem>
+                            <MenuItem value={'youtube'}>YouTube</MenuItem>
+                            <MenuItem value={'tiktok'}>TikTok</MenuItem>
+                          </Select>
+                        </FormControl>
+                      </Grid>
+                    </>
+                  )}
+                  {count === 3 && (
+                    <>
+                      <Grid item xs={12} md={5}>
+                        <Typography variant="h6">Promotion Type</Typography>
+                        <Typography>What do you wish to promote</Typography>
+                      </Grid>
+                      <Grid item xs={12} md={7}>
+                        <FormControl variant="outlined" fullWidth>
+                          <InputLabel id="demo-simple-select-outlined-label">
+                            Campaign Promotion
+                          </InputLabel>
+                          <Select
+                            labelId="demo-simple-select-outlined-label"
+                            id="demo-simple-select-outlined"
+                            label="Age"
+                            name="promotionType"
+                            onChange={updateForm}
+                          >
+                            <MenuItem value="">
+                              <em>None</em>
+                            </MenuItem>
+                            <MenuItem value={'Brand Promotion'}>Brand Promotion</MenuItem>
+                            <MenuItem value={'Campaign Promotion'}>Campaign Promotion</MenuItem>
+                            <MenuItem value={'Event Promotion'}>Event Promotion</MenuItem>
+                            <MenuItem value={'Hotel Promotion'}>Hotel Promotion</MenuItem>
+                            <MenuItem value={'Movie Promotion'}>Movie Promotion</MenuItem>
+                            <MenuItem value={'Product Promotion'}>Product Promotion</MenuItem>
+                            <MenuItem value={'Restaurant Promotion'}>Restaurant Promotion</MenuItem>
+                            <MenuItem value={'Service Promotion'}>Service Promotion</MenuItem>
+                          </Select>
+                        </FormControl>
+                      </Grid>
+                    </>
+                  )}
+                  {count === 4 && (
+                    <>
+                      <Grid item xs={12} md={5}>
+                        <Typography variant="h6">"{form.promotionType!=='' ? form.promotionType : 'Campaign'}" Name</Typography>
+                        <Typography>
+                          Name of the type you want to promote
+                        </Typography>
+                      </Grid>
+                      <Grid item xs={12} md={7}>
+                        <TextField
+                          id="outlined-full-width"
+                          label="Campaign Name"
+                          placeholder="Enter campaign name"
+                          fullWidth
+                          variant="outlined"
+                        />
+                      </Grid>
+                    </>
+                  )}
+                  {count === 5 && (
+                    <>
+                      <>
+                        <Grid item xs={12} md={5}>
+                          <Typography variant="h6">
+                            Who'll create the content?
+                          </Typography>
+                          <Typography>
+                            Choose "Yourself" if you'll provide the content
+                          </Typography>
+                        </Grid>
+                        <Grid item xs={12} md={7}>
+                          <Button
+                            variant="contained"
+                            onClick={() => setContentOption("influencer")}
+                          >
+                            influencer
+                          </Button>
+                          <Button
+                            variant="contained"
+                            onClick={() => setContentOption("yourself")}
+                          >
+                            Yourself
+                          </Button>
+                        </Grid>
+                      </>
+                      {contentOption === "influencer" && (
+                        <>
+                          <Grid item xs={12} md={5}>
+                            <Typography variant="h6">
+                              Will have to come to a place?
+                            </Typography>
+                            <Typography>
+                              If the influencer has to come to a place for the
+                              product/content
+                            </Typography>
+                          </Grid>
+                          <Grid item xs={12} md={7}>
+                            <Button
+                              variant="contained"
+                              onClick={() => handlePlaceOption("yes")}
+                            >
+                              Yes
+                            </Button>
+                            <Button
+                              variant="contained"
+                              onClick={() => setLocationOption("")}
+                            >
+                              No
+                            </Button>
+                            {locationOption === "yes" && (
+                              <Box>
+                                <FormControl variant="outlined" fullWidth>
+                                  <InputLabel id="demo-simple-select-outlined-label">
+                                    Campaign Promotion
+                                  </InputLabel>
+                                  <Select
+                                    labelId="demo-simple-select-outlined-label"
+                                    id="demo-simple-select-outlined"
+                                    name="division"
+                                    onChange={updateForm}
+                                  >
+                                    <MenuItem value="">
+                                      <em>None</em>
+                                    </MenuItem>
+                                    <MenuItem value={'Dhaka'}>Dhaka</MenuItem>
+                                    <MenuItem value={'Chattogram'}>Chattogram</MenuItem>
+                                    <MenuItem value={'Mymensingh'}>Mymensingh</MenuItem>
+                                    <MenuItem value={'Rajshahi'}>Rajshahi</MenuItem>
+                                    <MenuItem value={'Rangpur'}>Rangpur</MenuItem>
+                                    <MenuItem value={'Sylhet'}>Sylhet</MenuItem>
+                                    <MenuItem value={'Barishal'}>Barisal</MenuItem>
+                                  </Select>
+                                </FormControl>
+                                <TextField
+                                  id="outlined-full-width"
+                                  label="Enter Address"
+                                  placeholder="Enter address"
+                                  fullWidth
+                                  variant="outlined"
+                                  name="address"
+                                onChange={updateForm}
+                                />
+                              </Box>
+                            )}
+                          </Grid>
+                        </>
+                      )}
+
+                      {contentOption === "yourself" && (
+                        <>
+                          <Grid item xs={12} md={5}>
+                            <Typography variant="h6">Upload Content</Typography>
+                            <Typography>
+                              Upload content for the influencer
+                            </Typography>
+                          </Grid>
+                          <Grid item xs={12} md={7}>
+                            upload file
+                          </Grid>
+                        </>
+                      )}
+                    </>
+                  )}
+                  {count === 6 && (
+                    <>
+                      <>
+                        <Grid item xs={12} md={5}>
+                          <Typography variant="h6">
+                            Will you be sending a product to the influencer?
+                          </Typography>
+                          <Typography>
+                            The monetary value of the product (BDT)
+                          </Typography>
+                        </Grid>
+                        <Grid item xs={12} md={7}>
+                          <Button
+                            variant="contained"
+                            onClick={() => setSendOption("yes")}
+                          >
+                            Yes
+                          </Button>
+                          <Button
+                            variant="contained"
+                            onClick={() => setSendOption("")}
+                          >
+                            No
+                          </Button>
+                          {sendOption === "yes" && (
+                            <TextField
+                              id="outlined-full-width"
+                              label="Contact No."
+                              placeholder="Enter null name"
+                              fullWidth
+                              variant="outlined"
+                            />
+                          )}
+                        </Grid>
+                      </>
+                    </>
+                  )}
+                </Grid>
+                {count === 6 && (
+                  <Link to="/new/content">
+                    <Button
+                      variant="contained"
+                      className="btn btn-primary"
+                      type="submit"
+                    >
+                      save & continue
+                    </Button>
+                  </Link>
+                )}
+              </form>
+            </Box>
+            <Button
+              variant="contained"
+              className={classes.button}
+              type="submit"
+              onClick={() => setCount(count - 1)}
+              disabled={count === 1}
+            >
+              Back
+            </Button>
+            <Button
+              variant="contained"
+              className={classes.button}
+              type="submit"
+              onClick={() => setCount(count + 1)}
+              disabled={count === 6}
+            >
+              Next
+            </Button>
+          </Paper>
+        </Grid>
+      </Grid>
+    </Container>
+    
+  );
 };
 
 export default GeneralForm;
