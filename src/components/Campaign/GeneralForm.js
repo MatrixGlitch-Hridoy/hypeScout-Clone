@@ -14,8 +14,15 @@ import {
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { useHistory} from "react-router-dom";
+import clsx from 'clsx';
+
+import { useForm } from "react-hook-form";
+
 const useStyles = makeStyles((theme) => ({
+  display:{
+    display:'none'
+  },
   link: {
     "& *": {
       cursor: "pointer",
@@ -33,101 +40,97 @@ const useStyles = makeStyles((theme) => ({
 
 const GeneralForm = () => {
   const classes = useStyles();
-  const [form, setForm] = useState({
-    platform: "",
-    AdditionalPlatform: "",
-    promotionType: "",
-    promotionName:"",
-    place:{
-        division:"abc",
-        address:""
+  const history = useHistory();
+  //form hook 
+  const { register, handleSubmit, watch, formState: { errors } } = useForm();
+  const onSubmit = data => {
+    let test={
+      platform: data.platform,
+      AdditionalPlatform: data.AdditionalPlatform,
+      promotionType: data.promotionType,
+      promotionName:data.promotionName,
+      place:{
+          division:data.division,
+          address:data.address
+      },
+      contentOwner:contentOption,
+      contentOwnerImage:data.contentOwnerImage,
+      monetaryValue:data.monetaryValue,
+      
     }
     
-  });
+    console.log('submit test data',test);
+    history.push('/new/content');
+  };
+  //
+  // const [form, setForm] = useState({
+  //   platform: "",
+  //   AdditionalPlatform: "",
+  //   promotionType: "",
+  //   promotionName:"",
+  //   place:{
+  //       division:"",
+  //       address:""
+  //   },
+  //   contentOwner:"",
+  //   contentOwnerPlace:{
+  //     city:"",
+  //     address:""
+  //   },
+  //   contentOwnerImage:"",
+  //   monetaryValue:""
+    
+  // });
   const [count, setCount] = useState(1);
   const [contentOption, setContentOption] = useState("");
   const [locationOption, setLocationOption] = useState("");
   const [sendOption, setSendOption] = useState("");
-  const updateForm = (e) => {
-   
-    // (e.target.name==='division'||e.target.name==='address')?(
-      
-        
-    //     setForm({
-       
-    //     ...form,
+  // const updateForm = (e) => {
+  //     if(e.target.name==='division'||e.target.name==='address'){
+  //       var placechange={
+  //           ...form.place,
+  //           [e.target.name]: e.target.value,
+  //       }
+  //       setForm({
+  //           ...form,
+  //           place: placechange,
+  //         })
+  //     }else{
+  //       setForm({
+  //           ...form,         
+  //           [e.target.name]: e.target.value,
+ 
+  //         })
+  //     }
+  //   // setForm({
+  //   //     ...form.place,
      
-    //     place: placechange,
-        
-        
-        
-    //   })):( setForm({
-       
-    //     ...form,
-       
-    //     [e.target.name]: e.target.value,
-        
-    //   }))
-
-      if(e.target.name==='division'||e.target.name==='address'){
-        var placechange={
-            ...form.place,
-         
-            [e.target.name]: e.target.value,
-    
-        }
-
-        setForm({
-       
-            ...form,
-         
-            place: placechange,
-            
-            
-            
-          })
-
-      }else{
-        setForm({
-       
-            ...form,
-           
-            [e.target.name]: e.target.value,
-            
-          })
-      }
-
-    
-    
-    // setForm({
-    //     ...form.place,
-     
-    //     [e.target.name]: e.target.value,
+  //   //     [e.target.name]: e.target.value,
       
-    // });
-  };
+  //   // });
+  // };
   const handlePlaceOption = (value) => {
     setLocationOption(value);
   };
-  console.log('set value',form);
+  // console.log('set value',form);
   return (
     <Container>
       <Grid container justifyContent="center" style={{ margin: "2rem 0" }}>
         <Grid item xs={12} md={10}>
           <Paper style={{ padding: "2rem" }}>
             <Box>
-              <form>
+              <form onSubmit={handleSubmit(onSubmit)}>
                 <Grid container alignItems="center">
                   {count === 1 && (
                     <>
                       <Grid item xs={12} md={5}>
-                        <Typography variant="h6">Primary Platform</Typography>
-                        <Typography>
+                        <Typography variant="h6" style={{fontWeight:'900'}}>Primary Platform</Typography>
+                        <Typography style={{fontSize:'13px'}}>
                           Primary platform where you want to run this campaign
                         </Typography>
                       </Grid>
                       <Grid item xs={12} md={7}>
-                        <FormControl variant="outlined" fullWidth>
+                        <FormControl variant="outlined" fullWidth style={{marginTop:"1rem"}}>
                           <InputLabel id="demo-simple-select-outlined-label">
                             Select Primary Platform
                           </InputLabel>
@@ -136,8 +139,8 @@ const GeneralForm = () => {
                             id="demo-simple-select-outlined"
                             label="Age"
                             name="platform"
-                            onChange={updateForm}
-    //           value={form.password}
+                            // onChange={updateForm}
+                            {...register("platform")}
                           >
                             <MenuItem value="">
                               <em>None</em>
@@ -154,24 +157,25 @@ const GeneralForm = () => {
                   {count === 2 && (
                     <>
                       <Grid item xs={12} md={5}>
-                        <Typography variant="h6">
+                        <Typography variant="h6" style={{fontWeight:'900'}}>
                           Additional Platforms (Optional)
                         </Typography>
-                        <Typography>
+                        <Typography style={{fontSize:'13px'}}>
                           Additional platforms to boost your campaign
                         </Typography>
                       </Grid>
                       <Grid item xs={12} md={7}>
-                        <FormControl variant="outlined" fullWidth>
+                        <FormControl variant="outlined" fullWidth style={{marginTop:"1rem"}}>
                           <InputLabel id="demo-simple-select-outlined-label">
-                            City
+                            Select Additional Platform
                           </InputLabel>
                           <Select
                             labelId="demo-simple-select-outlined-label"
                             id="demo-simple-select-outlined"
                             label="Age"
                             name="AdditionalPlatform"
-                            onChange={updateForm}
+                            // onChange={updateForm}
+                            {...register("AdditionalPlatform")}
                           >
                             <MenuItem value="">
                               <em>None</em>
@@ -188,11 +192,11 @@ const GeneralForm = () => {
                   {count === 3 && (
                     <>
                       <Grid item xs={12} md={5}>
-                        <Typography variant="h6">Promotion Type</Typography>
-                        <Typography>What do you wish to promote</Typography>
+                        <Typography variant="h6" style={{fontWeight:'900'}}>Promotion Type</Typography>
+                        <Typography style={{fontSize:'13px'}}>What do you wish to promote</Typography>
                       </Grid>
                       <Grid item xs={12} md={7}>
-                        <FormControl variant="outlined" fullWidth>
+                        <FormControl variant="outlined" fullWidth style={{marginTop:"1rem"}}>
                           <InputLabel id="demo-simple-select-outlined-label">
                             Campaign Promotion
                           </InputLabel>
@@ -201,7 +205,8 @@ const GeneralForm = () => {
                             id="demo-simple-select-outlined"
                             label="Age"
                             name="promotionType"
-                            onChange={updateForm}
+                            // onChange={updateForm}
+                            {...register("promotionType")}
                           >
                             <MenuItem value="">
                               <em>None</em>
@@ -222,8 +227,9 @@ const GeneralForm = () => {
                   {count === 4 && (
                     <>
                       <Grid item xs={12} md={5}>
-                        <Typography variant="h6">"{form.promotionType!=='' ? form.promotionType : 'Campaign'}" Name</Typography>
-                        <Typography>
+                        {/* <Typography variant="h6" style={{fontWeight:'900'}}>"{form.promotionType!=='' ? form.promotionType : 'Campaign'}" Name</Typography> */}
+                        <Typography variant="h6" style={{fontWeight:'900'}}>"Campaign" Name</Typography> 
+                        <Typography style={{fontSize:'13px'}}>
                           Name of the type you want to promote
                         </Typography>
                       </Grid>
@@ -234,6 +240,10 @@ const GeneralForm = () => {
                           placeholder="Enter campaign name"
                           fullWidth
                           variant="outlined"
+                          style={{marginTop:"1rem"}}
+                          name="promotionName"
+                          // onChange={updateForm}
+                          {...register("promotionName")}
                         />
                       </Grid>
                     </>
@@ -242,55 +252,70 @@ const GeneralForm = () => {
                     <>
                       <>
                         <Grid item xs={12} md={5}>
-                          <Typography variant="h6">
+                          <Typography variant="h6" style={{fontWeight:'900'}}>
                             Who'll create the content?
                           </Typography>
-                          <Typography>
+                          <Typography style={{fontSize:'13px'}}>
                             Choose "Yourself" if you'll provide the content
                           </Typography>
                         </Grid>
                         <Grid item xs={12} md={7}>
-                          <Button
-                            variant="contained"
-                            onClick={() => setContentOption("influencer")}
-                          >
-                            influencer
-                          </Button>
-                          <Button
-                            variant="contained"
-                            onClick={() => setContentOption("yourself")}
-                          >
-                            Yourself
-                          </Button>
+                          <Box sx={{my:2}}>
+                            <Button
+                              variant="contained"
+                              onClick={() => setContentOption("influencer")}
+                              className={contentOption==='influencer' && classes.button}
+                              // type="input"
+                              // value="influencer"
+                              {...register("contentOwner")}
+                            >
+                              Inlfuencer
+                            </Button>
+                            <Button
+                              variant="contained"
+                              onClick={() => setContentOption("yourself")}
+                              className={contentOption==='yourself' && classes.button}
+                              style={{marginLeft:'1rem'}}
+                              // type="input"
+                              // value="myself"
+                              {...register("contentOwner")}
+                            >
+                              Yourself
+                            </Button>
+                          </Box>
                         </Grid>
                       </>
                       {contentOption === "influencer" && (
                         <>
                           <Grid item xs={12} md={5}>
-                            <Typography variant="h6">
+                            <Typography variant="h6" style={{fontWeight:'900'}}>
                               Will have to come to a place?
                             </Typography>
-                            <Typography>
+                            <Typography style={{fontSize:'13px'}}>
                               If the influencer has to come to a place for the
                               product/content
                             </Typography>
                           </Grid>
                           <Grid item xs={12} md={7}>
-                            <Button
-                              variant="contained"
-                              onClick={() => handlePlaceOption("yes")}
-                            >
-                              Yes
-                            </Button>
-                            <Button
-                              variant="contained"
-                              onClick={() => setLocationOption("")}
-                            >
-                              No
-                            </Button>
+                            <Box sx={{mt:'1rem'}}>
+                              <Button
+                                variant="contained"
+                                onClick={() => handlePlaceOption("yes")}
+                                className={locationOption && classes.button}
+                              >
+                                Yes
+                              </Button>
+                              <Button
+                                variant="contained"
+                                onClick={() => setLocationOption("")}
+                                style={{marginLeft:'1rem'}}
+                              >
+                                No
+                              </Button>
+                            </Box>
                             {locationOption === "yes" && (
                               <Box>
-                                <FormControl variant="outlined" fullWidth>
+                                <FormControl variant="outlined" fullWidth style={{margin:"1rem 0"}}>
                                   <InputLabel id="demo-simple-select-outlined-label">
                                     Campaign Promotion
                                   </InputLabel>
@@ -298,7 +323,8 @@ const GeneralForm = () => {
                                     labelId="demo-simple-select-outlined-label"
                                     id="demo-simple-select-outlined"
                                     name="division"
-                                    onChange={updateForm}
+                                    // onChange={updateForm}
+                                    {...register("division")}
                                   >
                                     <MenuItem value="">
                                       <em>None</em>
@@ -319,7 +345,8 @@ const GeneralForm = () => {
                                   fullWidth
                                   variant="outlined"
                                   name="address"
-                                onChange={updateForm}
+                                  {...register("address")}
+                                  // onChange={updateForm}
                                 />
                               </Box>
                             )}
@@ -330,13 +357,24 @@ const GeneralForm = () => {
                       {contentOption === "yourself" && (
                         <>
                           <Grid item xs={12} md={5}>
-                            <Typography variant="h6">Upload Content</Typography>
-                            <Typography>
+                            <Typography variant="h6" style={{fontWeight:'900'}}>Upload Content</Typography>
+                            <Typography style={{fontSize:'13px'}}>
                               Upload content for the influencer
                             </Typography>
                           </Grid>
                           <Grid item xs={12} md={7}>
-                            upload file
+                            <Box sx={{mt:"1rem"}}>
+                              <Button
+                                variant="contained"
+                                component="label"
+                              >
+                                Choose File
+                                <input
+                                  type="file"
+                                  hidden
+                                />
+                              </Button>
+                            </Box>
                           </Grid>
                         </>
                       )}
@@ -346,33 +384,39 @@ const GeneralForm = () => {
                     <>
                       <>
                         <Grid item xs={12} md={5}>
-                          <Typography variant="h6">
+                          <Typography variant="h6" style={{fontWeight:'900'}}>
                             Will you be sending a product to the influencer?
                           </Typography>
-                          <Typography>
+                          <Typography style={{fontSize:'13px'}}>
                             The monetary value of the product (BDT)
                           </Typography>
                         </Grid>
                         <Grid item xs={12} md={7}>
-                          <Button
-                            variant="contained"
-                            onClick={() => setSendOption("yes")}
-                          >
-                            Yes
-                          </Button>
-                          <Button
-                            variant="contained"
-                            onClick={() => setSendOption("")}
-                          >
-                            No
-                          </Button>
+                          <Box sx={{my:"1rem"}}>
+                            <Button
+                              variant="contained"
+                              onClick={() => setSendOption("yes")}
+                              className={sendOption && classes.button}
+                            >
+                              Yes
+                            </Button>
+                            <Button
+                              variant="contained"
+                              onClick={() => setSendOption("")}
+                              style={{marginLeft:'1rem'}}
+                            >
+                              No
+                            </Button>
+                          </Box>
                           {sendOption === "yes" && (
                             <TextField
                               id="outlined-full-width"
-                              label="Contact No."
-                              placeholder="Enter null name"
+                              label="Monetary"
+                              placeholder="Enter amount"
                               fullWidth
                               variant="outlined"
+                              name="monetaryValue"
+                              {...register("monetaryValue")}
                             />
                           )}
                         </Grid>
@@ -380,8 +424,8 @@ const GeneralForm = () => {
                     </>
                   )}
                 </Grid>
+                <Box sx={{mt:3}}>
                 {count === 6 && (
-                  <Link to="/new/content">
                     <Button
                       variant="contained"
                       className="btn btn-primary"
@@ -389,33 +433,33 @@ const GeneralForm = () => {
                     >
                       save & continue
                     </Button>
-                  </Link>
                 )}
+                </Box>
               </form>
             </Box>
-            <Button
-              variant="contained"
-              className={classes.button}
-              type="submit"
-              onClick={() => setCount(count - 1)}
-              disabled={count === 1}
-            >
-              Back
-            </Button>
-            <Button
-              variant="contained"
-              className={classes.button}
-              type="submit"
-              onClick={() => setCount(count + 1)}
-              disabled={count === 6}
-            >
-              Next
-            </Button>
+              <Box sx={{mt:3}}>
+                <Button
+                  variant="contained"
+                  className={count===1 ? clsx(classes.display):clsx(classes.button)}
+                  type="submit"
+                  onClick={() => setCount(count - 1)}
+                >
+                  Back
+                </Button>
+                <Button
+                  variant="contained"
+                  type="submit"
+                  onClick={() => setCount(count + 1)}
+                  className={count===6 ? clsx(classes.display):clsx(classes.button)}
+                  style={{marginLeft:'1rem'}}
+                >
+                  Next
+                </Button>
+              </Box>
           </Paper>
         </Grid>
       </Grid>
-    </Container>
-    
+    </Container> 
   );
 };
 
