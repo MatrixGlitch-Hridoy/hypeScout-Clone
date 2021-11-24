@@ -142,6 +142,31 @@ const ContentForm = () => {
                                 >
                                 Story
                                 </Button>
+                                {
+                                    fbContentPlacement.post==='post' && <>
+                                        <TextField
+                                            id="outlined-full-width"
+                                            label="Monetary"
+                                            placeholder="Enter amount"
+                                            fullWidth
+                                            variant="outlined"
+                                            name="monetaryValue"
+                                            {...register("monetaryValue")}
+                                        />
+                                    </>
+                                }
+                                {fbContentPlacement.story==='story' && <>
+                                <TextField
+                                            id="outlined-full-width"
+                                            label="Monetary"
+                                            placeholder="Enter amount"
+                                            fullWidth
+                                            variant="outlined"
+                                            name="monetaryValue"
+                                            {...register("monetaryValue")}
+                                        />
+                                </>
+                                }
                             </Box>
                       </Grid>
                     </>
