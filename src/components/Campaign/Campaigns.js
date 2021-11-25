@@ -3,6 +3,7 @@ import React from 'react';
 import { Link, useRouteMatch, Switch, Route } from 'react-router-dom';
 import CampaignOption from './CampaignOption';
 import ContentForm from './ContentForm';
+import DescriptionForm from './DescriptionForm';
 import GeneralForm from './GeneralForm';
 const useStyles = makeStyles((theme) => ({
     link: {
@@ -36,7 +37,7 @@ const Campaigns = () => {
                                         <Link to={`${url}/content`}>Content Types</Link>
                                     </Grid>
                                     <Grid item xs={12} md={2}>
-                                        <Link>Description</Link>
+                                        <Link to={`${url}/description`}>Description</Link>
                                     </Grid>
                                     <Grid item xs={12} md={2}>
                                         <Link>Targeting</Link>
@@ -61,6 +62,9 @@ const Campaigns = () => {
 
                        <Route exact path={`${path}/content`}>
                             <ContentForm/>
+                       </Route>
+                       <Route exact path={`${path}/description`}>
+                            <DescriptionForm/>
                        </Route>
                        
                    </Switch>
