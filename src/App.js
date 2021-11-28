@@ -7,6 +7,8 @@ import {
 import ProfilePage from "./Pages/UserPages/ProfilePage";
 import SettingPage from "./Pages/UserPages/SettingPage";
 import CampaignPage from "./Pages/UserPages/CampaignPage";
+import LoginPage from "./Pages/UserPages/LoginPage";
+import RegisterPage from "./Pages/UserPages/RegisterPage";
 
 function App() {
   return (
@@ -23,6 +25,12 @@ function App() {
         </Route>
         <Route path="/new">
           <CampaignPage/>
+        </Route>
+        <Route path="/login">
+          <LoginPage/>
+        </Route>
+        <Route path="/register">
+          <RegisterPage/>
         </Route>
       </Switch>
     </Router>
