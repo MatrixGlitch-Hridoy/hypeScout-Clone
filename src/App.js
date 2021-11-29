@@ -9,6 +9,8 @@ import SettingPage from "./Pages/UserPages/SettingPage";
 import CampaignPage from "./Pages/UserPages/CampaignPage";
 import LoginPage from "./Pages/UserPages/LoginPage";
 import RegisterPage from "./Pages/UserPages/RegisterPage";
+import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
+import CampaignOption from "./components/Campaign/CampaignOption";
 
 function App() {
   return (

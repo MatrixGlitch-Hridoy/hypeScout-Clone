@@ -1,21 +1,18 @@
 import React from "react";
 import {
   AppBar,
-
   Box,
   Button,
   Container,
-
   IconButton,
   Menu,
   MenuItem,
   Toolbar,
-
   Typography,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { useHistory} from "react-router-dom";
-import MenuIcon from '@material-ui/icons/Menu';
+import { useHistory } from "react-router-dom";
+import MenuIcon from "@material-ui/icons/Menu";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -31,19 +28,19 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "white",
     color: "black",
     boxShadow: "none",
-    marginTop:'1rem',
-    marginBottom:'2rem'
+    marginTop: "1rem",
+    marginBottom: "2rem",
   },
-  flex:{
-      justifyContent:'center',
-      marginBottom:30
+  flex: {
+    justifyContent: "center",
+    marginBottom: 30,
   },
-  button:{
-    backgroundColor:'black',
-    color:'white',
-  }
+  button: {
+    backgroundColor: "black",
+    color: "white",
+  },
 }));
-const pages = ['Campaigns', 'Profile', 'Setting'];
+const pages = ["Campaigns", "Profile", "Setting"];
 const Header = () => {
   const classes = useStyles();
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -51,27 +48,27 @@ const Header = () => {
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
-  const handleCloseNavMenu = (route) => {
+  const handleCloseNavMenu = (value) => {
+    history.push(value);
     setAnchorElNav(null);
-    history.push('')
   };
   const history = useHistory();
   return (
     <AppBar position="static" className={classes.appbar}>
       <Container container>
-      <Toolbar disableGutters>
-          <Box sx={{flexGrow: 1, mr: 2, display: { xs: 'none', md: 'flex' } }}>
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            onClick={()=>history.push('/')}
-            style={{cursor:'pointer'}}
-          >
-            hype scout
-          </Typography>
+        <Toolbar disableGutters>
+          <Box sx={{ flexGrow: 1, mr: 2, display: { xs: "none", md: "flex" } }}>
+            <Typography
+              variant="h6"
+              noWrap
+              component="div"
+              onClick={() => history.push("/")}
+              style={{ cursor: "pointer" }}
+            >
+              hype scout
+            </Typography>
           </Box>
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' }}}>
+          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -86,66 +83,85 @@ const Header = () => {
               id="menu-appbar"
               anchorEl={anchorElNav}
               anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
+                vertical: "bottom",
+                horizontal: "left",
               }}
               keepMounted
               transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
+                vertical: "top",
+                horizontal: "left",
               }}
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
               sx={{
-                display: { xs: 'block', md: 'none' },
+                display: { xs: "block", md: "none" },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+                <MenuItem >
+                  <Typography textAlign="center" onClick={() => handleCloseNavMenu("/")}>Campaigns</Typography>
                 </MenuItem>
-              ))}
+                <MenuItem >
+                  <Typography textAlign="center" onClick={() => handleCloseNavMenu("/profile")}>Profile</Typography>
+                </MenuItem>
+                <MenuItem >
+                  <Typography textAlign="center" onClick={() => handleCloseNavMenu("/setting/personal")}>Settings</Typography>
+                </MenuItem>
             </Menu>
           </Box>
 
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            onClick={()=>history.push('/')}
-            style={{cursor:'pointer'}}
-          >
-            hype scout
-          </Typography>
+          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+            <Typography
+              variant="h6"
+              noWrap
+              component="div"
+              onClick={() => history.push("/")}
+              style={{ cursor: "pointer" }}
+            >
+              hype scout
+            </Typography>
           </Box>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } ,justifyContent:'space-around' }}>
+          <Box
+            sx={{
+              flexGrow: 1,
+              display: { xs: "none", md: "flex" },
+              justifyContent: "space-around",
+            }}
+          >
             {/* {pages.map((page) => ( */}
-              <Button
-                onClick={()=>handleCloseNavMenu()}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                Campaigns
-              </Button>
-              <Button
-                onClick={()=>{handleCloseNavMenu()}}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                Profile
-              </Button>
-              <Button
-                onClick={()=>{history.push('/setting/personal');handleCloseNavMenu()}}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                Settings
-              </Button>
+            <Button
+              onClick={() => handleCloseNavMenu("/")}
+              sx={{ my: 2, color: "white", display: "block" }}
+            >
+              Campaigns
+            </Button>
+            <Button
+              onClick={() => {
+                handleCloseNavMenu("/profile");
+              }}
+              sx={{ my: 2, color: "white", display: "block" }}
+            >
+              Profile
+            </Button>
+            <Button
+              onClick={() => {
+                handleCloseNavMenu("/setting/personal");
+              }}
+              sx={{ my: 2, color: "white", display: "block" }}
+            >
+              Settings
+            </Button>
             {/* // ))} */}
           </Box>
-            <Box sx={{ flexGrow: 1 ,justifyContent:'flex-end' }}>
-              <Button onClick={()=>history.push('/login')}>Login</Button>
-              <Button className={classes.button} onClick={()=>history.push('/register')}>Get Started</Button>
-            </Box>
-            </Toolbar>
+          <Box sx={{ flexGrow: 1, display:'flex',justifyContent: "flex-end" }}>
+            <Button onClick={() => history.push("/login")}>Login</Button>
+            <Button
+              className={classes.button}
+              onClick={() => history.push("/register")}
+            >
+              Get Started
+            </Button>
+          </Box>
+        </Toolbar>
       </Container>
     </AppBar>
   );

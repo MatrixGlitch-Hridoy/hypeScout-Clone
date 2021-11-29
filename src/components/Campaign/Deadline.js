@@ -116,6 +116,7 @@ const Deadline = () => {
                       variant="contained"
                       className="btn btn-primary"
                       type="submit"
+                      onClick={()=>history.push('/')}
                     >
                       save & Finish
                     </Button>

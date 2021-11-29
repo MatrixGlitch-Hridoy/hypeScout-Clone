@@ -14,7 +14,6 @@ import {
   import clsx from 'clsx';
   
   import { useForm } from "react-hook-form";
-  
   const useStyles = makeStyles((theme) => ({
     display:{
       display:'none'
@@ -375,6 +374,7 @@ const Targeting = () => {
                       variant="contained"
                       className="btn btn-primary"
                       type="submit"
+                      onClick={()=>history.push('/new/deadline')}
                     >
                       save & continue
                     </Button>

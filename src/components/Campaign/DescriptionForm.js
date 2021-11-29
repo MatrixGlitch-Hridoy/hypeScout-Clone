@@ -75,7 +75,7 @@ const DescriptionForm = () => {
                         </Typography>
                       </Grid>
                       <Grid item xs={12} md={7}>
-                        <TextareaAutosize aria-label="empty textarea" placeholder="Empty" {...register("campaignDescription")}/>
+                        <TextField variant="outlined" placeholder="write description" multiline minRows={8} maxRows={10} fullWidth style={{marginTop:'1rem'}}/>
                         
                       </Grid>
                     </>
@@ -91,7 +91,7 @@ const DescriptionForm = () => {
                         </Typography>
                       </Grid>
                       <Grid item xs={12} md={7}>
-                        <TextareaAutosize aria-label="empty textarea" placeholder="Empty" {...register("captionSample")}/>
+                      <TextField variant="outlined" placeholder="write caption reference" multiline minRows={8} maxRows={10} fullWidth style={{marginTop:'1rem'}}/>
                         
                       </Grid>
                     </>
@@ -133,6 +133,7 @@ const DescriptionForm = () => {
                       variant="contained"
                       className="btn btn-primary"
                       type="submit"
+                      onClick={()=>history.push('/new/targeting')}
                     >
                       save & continue
                     </Button>

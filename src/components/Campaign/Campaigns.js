@@ -1,6 +1,7 @@
 import { Box, Container, Grid, makeStyles, Paper } from '@material-ui/core';
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useRouteMatch, Switch, Route } from 'react-router-dom';
+import PrivateRoute from '../PrivateRoute/PrivateRoute';
 import CampaignOption from './CampaignOption';
 import ContentForm from './ContentForm';
 import Deadline from './Deadline';
@@ -19,16 +20,24 @@ const useStyles = makeStyles((theme) => ({
         },
       },
     },
+    disableLink:{
+        pointerEvents: 'none',
+        color:'#939aa3'
+    }
   }));
 const Campaigns = () => {
     let {path,url} = useRouteMatch();
     const classes = useStyles();
+    const [click,setClick] = useState(false);
+    const handleClick = () => {
+        setClick(true);
+    }
     return (
         <>
         <Container>
                 <Grid container justifyContent="center">
                         <Grid item xs={12} md={10} >
-                        <Paper style={{padding:'2rem 2rem .5rem 2rem'}}>
+                            <Paper style={{padding:'2rem 2rem .5rem 2rem'}}>
                             {/* <Box>
                                 Paid Campaign
                             </Box> */}
@@ -38,16 +47,16 @@ const Campaigns = () => {
                                         <Link to={`${url}/general`}>General</Link>
                                     </Grid>
                                     <Grid item xs={12} md={2}>
-                                        <Link to={`${url}/content`}>Content Types</Link>
+                                        <Link to={`${url}/content`} className={click===false && classes.disableLink}>Content Types</Link>
                                     </Grid>
                                     <Grid item xs={12} md={2}>
-                                        <Link to={`${url}/description`}>Description</Link>
+                                        <Link to={`${url}/description`} className={classes.disableLink}>Description</Link>
                                     </Grid>
                                     <Grid item xs={12} md={2}>
-                                        <Link to={`${url}/targeting`}>Targeting</Link>
+                                        <Link to={`${url}/targeting`} className={classes.disableLink}>Targeting</Link>
                                     </Grid>
                                     <Grid item xs={12} md={2}>
-                                        <Link to={`${url}/deadline`}>Deadline</Link>
+                                        <Link to={`${url}/deadline`} className={classes.disableLink}>Deadline</Link>
                                     </Grid>
                                 </Grid>
                             </Box>
@@ -58,15 +67,15 @@ const Campaigns = () => {
                 {/* Nested Route Here */}
                 <Switch>
                        <Route exact path={path}>
-                            <CampaignOption/>
+                            <CampaignOption />
                        </Route>
-                       <Route exact path={`${path}/general`}>
-                            <GeneralForm/>
+                       <Route exact path={`${path}/general`} >
+                            <GeneralForm test={handleClick}/>
                        </Route>
 
-                       <Route exact path={`${path}/content`}>
+                        <PrivateRoute exact path={`${path}/content`} click={click}>
                             <ContentForm/>
-                       </Route>
+                        </PrivateRoute>
                        <Route exact path={`${path}/description`}>
                             <DescriptionForm/>
                        </Route>

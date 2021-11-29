@@ -18,7 +18,6 @@ import { useHistory} from "react-router-dom";
 import clsx from 'clsx';
 
 import { useForm } from "react-hook-form";
-
 const useStyles = makeStyles((theme) => ({
   display:{
     display:'none'
@@ -38,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const GeneralForm = () => {
+const GeneralForm = ({test}) => {
   const classes = useStyles();
   const history = useHistory();
   //form hook 
@@ -59,7 +58,7 @@ const GeneralForm = () => {
       
     }
     
-    console.log('submit test data',test);
+    // console.log('submit test data',test);
     history.push('/new/content');
   };
   //
@@ -135,10 +134,9 @@ const GeneralForm = () => {
                             Select Primary Platform
                           </InputLabel>
                           <Select
-                            labelId="demo-simple-select-outlined-label"
                             id="demo-simple-select-outlined"
-                            label="Age"
                             name="platform"
+                            label="Select Primary Platform"
                             // onChange={updateForm}
                             {...register("platform")}
                           >
@@ -172,7 +170,7 @@ const GeneralForm = () => {
                           <Select
                             labelId="demo-simple-select-outlined-label"
                             id="demo-simple-select-outlined"
-                            label="Age"
+                            label="Select Additional Platform"
                             name="AdditionalPlatform"
                             // onChange={updateForm}
                             {...register("AdditionalPlatform")}
@@ -203,7 +201,7 @@ const GeneralForm = () => {
                           <Select
                             labelId="demo-simple-select-outlined-label"
                             id="demo-simple-select-outlined"
-                            label="Age"
+                            label="Campaign Promotion"
                             name="promotionType"
                             // onChange={updateForm}
                             {...register("promotionType")}
@@ -323,6 +321,7 @@ const GeneralForm = () => {
                                     labelId="demo-simple-select-outlined-label"
                                     id="demo-simple-select-outlined"
                                     name="division"
+                                    label="Campaign Promotion"
                                     // onChange={updateForm}
                                     {...register("division")}
                                   >
@@ -430,6 +429,7 @@ const GeneralForm = () => {
                       variant="contained"
                       className="btn btn-primary"
                       type="submit"
+                      onClick={() => test()}
                     >
                       save & continue
                     </Button>

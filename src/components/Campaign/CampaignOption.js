@@ -1,6 +1,7 @@
 import { Box, Button, Container, Grid, ListItem, makeStyles, Paper, Radio, Typography } from '@material-ui/core';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import Header from '../Shared/Header/Header';
 
 const useStyles = makeStyles((theme)=>({
     typography:{
@@ -32,6 +33,7 @@ const CampaignOption = () => {
     };
     console.log(selectedValue);
     return (
+        <>
         <Container container>
             <Box sx={{my:3}}>
                 <Typography variant="h4" style={{textAlign:'center'}} className={classes.typography}>What type of campaign do you want to run?</Typography>
@@ -41,7 +43,7 @@ const CampaignOption = () => {
                     <Paper className={classes.paid}>
                     <Grid container  alignItems='center' justifyContent='center'>
                         <Grid item xs={2}>
-                            image
+                            <img src="https://business.hypescout.co/static/media/paid.ebaf7306.svg" style={{width:'75%'}}/>
                         </Grid>
                         <Grid item xs={8}>
                             <Typography variant="h6" style={{fontWeight:'bold'}}>Paid Promotion</Typography>
@@ -64,7 +66,7 @@ const CampaignOption = () => {
                 <Paper className={classes.paid}>
                 <Grid container alignItems='center' justifyContent='center'>
                         <Grid item xs={2}>
-                            image
+                            <img src="https://business.hypescout.co/static/media/gift-box.7b860d0f.svg" style={{width:'75%'}}/>
                         </Grid>
                         <Grid item xs={8}>
                             <Typography variant="h6" style={{fontWeight:'bold'}}>Free Giveaway</Typography>
@@ -117,6 +119,7 @@ const CampaignOption = () => {
             
             }
         </Container>
+        </>
     );
 };
 
