@@ -8,6 +8,7 @@ import {
 import { makeStyles } from "@material-ui/core/styles";
 import { Image } from "@material-ui/icons";
 import React from "react";
+import { useHistory } from "react-router-dom";
 import image from "../../../images/banner.png";
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -54,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
 const Cards = ({ data }) => {
   // console.log(data, "Here");
   const classes = useStyles();
-
+  const history = useHistory();
   return (
     <>
       {data.length !== 0 ? (
@@ -84,7 +85,7 @@ const Cards = ({ data }) => {
               //   </div>
               // </Card>
 
-              <Grid item sm={12} md={6} className={classes.root} key={d.id}>
+              <Grid item sm={12} md={6} className={classes.root} key={d.id} onClick={()=>history.push('/camp-dash')}>
                 <Grid container>
                   <Paper className={classes.details}>
                    <Grid item xs={3} md={4}>

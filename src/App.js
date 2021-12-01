@@ -11,6 +11,7 @@ import LoginPage from "./Pages/UserPages/LoginPage";
 import RegisterPage from "./Pages/UserPages/RegisterPage";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import CampaignOption from "./components/Campaign/CampaignOption";
+import CampaignDescriptionPage from "./Pages/UserPages/CampaignDescriptionPage";
 
 function App() {
   return (
@@ -33,6 +34,9 @@ function App() {
         </Route>
         <Route path="/register">
           <RegisterPage/>
+        </Route>
+        <Route path="/camp-dash">
+          <CampaignDescriptionPage/>
         </Route>
       </Switch>
     </Router>

@@ -57,6 +57,13 @@ const DescriptionForm = () => {
   };
   const [count, setCount] = useState(1);
   const [tags,setTags] = useState([]);
+  const handleTag = (chips) => {
+    setTags([...tags,chips])
+  }
+  const handleDelete = (chip,index) => {
+    let a = tags.filter(y=>y!==chip);
+    setTags(a)
+  }
   console.log(tags)
   return (
     <Container>
@@ -106,7 +113,10 @@ const DescriptionForm = () => {
                       <ChipInput
                             fullWidth
                             placeholder='Write account names'
-                            onBlur={(e) => setTags([...tags, e.target.value])}
+                            // onBlur={(e) => setTags([...tags, e.target.value])}
+                            onChange={chips=>handleTag(chips)}
+                            onDelete={(chip,index)=>handleDelete(chip,index)}
+                            newChipKeys={['Enter']}
                             />
                       </Grid>
                     </>
