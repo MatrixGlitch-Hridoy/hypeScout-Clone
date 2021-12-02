@@ -59,11 +59,11 @@ const Header = () => {
         <Toolbar disableGutters>
           <Box sx={{ flexGrow: 1, mr: 2, display: { xs: "none", md: "flex" } }}>
             <Typography
-              variant="h6"
+              variant="h5"
               noWrap
               component="div"
               onClick={() => history.push("/")}
-              style={{ cursor: "pointer" }}
+              style={{ cursor: "pointer" ,fontWeight:900}}
             >
               hype scout
             </Typography>
